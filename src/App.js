@@ -19,6 +19,36 @@ class App extends Component {
           note (user input): the saved note.
         }
         */
+        {
+          id: 1,
+          lastSaved: (new Date()).toUTCString(),
+          title: 'First saved note :D',
+          text: 'test note test note test note test note test note test note'
+        },
+        {
+          id: 2,
+          lastSaved: (new Date()).toUTCString(),
+          title: 'Another note title',
+          text: 'aanother note test data to see how the <li> wraps</li>another note test data to see how the <li> wraps</li>another note test data to see how the <li> wraps</li>nother note test data to see how the <li> wraps</li>'
+        },
+        {
+          id: 3,
+          lastSaved: (new Date()).toUTCString(),
+          title: '3 Another note title',
+          text: 'another note test data to see how the <li> wraps</li>'
+        },
+        {
+          id: 4,
+          lastSaved: (new Date()).toUTCString(),
+          title: 'adhfaAnother note title',
+          text: 'another note test data to see how the <li> wraps</li>'
+        },
+        {
+          id: 5,
+          lastSaved: (new Date()).toUTCString(),
+          title: ' ayyy Another note title',
+          text: 'another note test data to see how the <li> wraps</li>'
+        },
       ], 
 
       notesCreated: 0, //* total notes created - will differ from allNotes length if notes were deleted
@@ -40,7 +70,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Routes />
+        <Routes allNotes={this.state.allNotes} />
         <Footer />
       </div>
     );

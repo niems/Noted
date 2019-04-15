@@ -1,12 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class DisplayNotes extends Component {
+function NoteItem({ note }) {
+  return (
+    <li id={note.id} className='saved-note'>
+      <div className='saved-note-title'>{note.title}</div>
+      <p className='saved-note-text-snippet'>{note.text}</p>
+      <div className='saved-note-date'>{note.lastSaved}</div>
+    </li>
+  );
+}
 
-  render() {
-    return (
-      <div className='content'>Note View</div>
-    );
-  }
+function DisplayNotes({ allNotes }) {
+  const noteList = allNotes.map(note => (
+    <NoteItem key={note.id} note={note} /> 
+  ));
+  return (
+    <div className='display-notes'>
+      <ul id='saved-notes-list'>{noteList}</ul>
+    </div>
+  );
 }
 
 export default DisplayNotes;

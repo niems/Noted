@@ -5,16 +5,16 @@ const NewNote = React.lazy(() => import('./components/NewNote'));
 const DisplayNotes = React.lazy(() => import('./components/DisplayNotes'));
 const NoMatch = React.lazy(() => import('./components/NoMatch'));
 
-function Routes() {
+function Routes({ allNotes }) {
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route exact path='/' component={DisplayNotes} />
+          <Route exact path='/' render={(props) => <DisplayNotes {...props} allNotes={allNotes} />} /> 
           <Route path='/new' component={NewNote} />
 
           {/* The NoMatch component is used if the above components aren't rendered */}
-          <NoMatch />
+          <Route component={NoMatch} />
         </Switch>
       </Suspense>
     </BrowserRouter>

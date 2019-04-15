@@ -1,10 +1,123 @@
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   box-sizing: border-box;
-  background-color: green;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 
   display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: [header] max-content [content] 1fr [footer] max-content;
+  grid-template-areas: "header header"
+                       "content content"
+                       "footer footer";
+
+  background-color: green;
 }
 
 header, footer {
-  background-color: red;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+header {
+  grid-area: header;
+}
+
+footer {
+  grid-area: footer;
+}
+
+
+/********************************* 
+ ** DisplayNotes setup
+* *********************************/
+
+/** display-notes: the wrapper around the list of saved notes*/
+.display-notes {
+  box-sizing: border-box;
+  grid-area: content;
+  background-color: yellow;
+  overflow-y: auto;
+}
+
+/** saved-notes-list: list of all notes in state */
+#saved-notes-list {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.25em;
+  background-color: orange;
+}
+
+/** saved-note: individual note list item */
+.saved-note {
+  box-sizing: border-box;
+  list-style-type: none;
+  max-height: 110px;
+  height: max-content;
+  width: 100%;
+  padding: 0.5em 0.25em;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+
+  border-style: none;
+  border-bottom: 1px solid gray;
+  background-color: #F8F8F8;
+}
+
+/*
+.saved-note {
+  height: 110px;
+  width: 100%;
+  box-sizing: border-box;
+  list-style-type: none;
+  
+  padding: 0.5em 0.25em;
+  margin: auto;
+
+  border-style: none;
+  border-bottom: 1px solid gray;
+  background-color: #F8F8F8;
+}
+*/
+
+/** saved-note-title: title of note */
+.saved-note-title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/** saved-note-text-snippet: a snippet of the note the user saved */
+.saved-note-text-snippet {
+  max-height: 2.25em;
+  overflow: hidden;
+  margin: 0.5em 0;
+
+  font-size: 1em;
+  text-indent: 1em; 
+  color: #111111;
+}
+
+/** saved-note-date: date the note was last saved */
+.saved-note-date {
+  font-size: 0.75em;
+  opacity: 0.65;
+}
+
+
+
+/** DESKTOP VIEW */
+@media screen and (min-width: 850px) {
+  .App {
+    grid-template-areas: "header header"
+                         "content ."
+                         "footer footer";
+  }
 }
