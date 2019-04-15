@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class NoteView extends Component {
+class DisplayNotes extends Component {
 
   render() {
     return (
@@ -9,4 +9,4 @@ class NoteView extends Component {
   }
 }
 
-export default NoteView;
+export default DisplayNotes;
