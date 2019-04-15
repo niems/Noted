@@ -52,6 +52,7 @@ class App extends Component {
       ], 
 
       notesCreated: 0, //* total notes created - will differ from allNotes length if notes were deleted
+      isEditingNote: false, //* true if a note is being created / edited
     };
 
     this.addNote = this.addNote.bind(this); //* appends new note to allNotes

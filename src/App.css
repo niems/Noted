@@ -6,6 +6,7 @@
   --content-bg-dark: #36393F;
   --content-fg-dark: #DCDDDE;
 }
+
 body {
   overflow: hidden;
   margin: 0;
@@ -29,8 +30,11 @@ body {
 }
 
 header, footer {
+  box-sizing: border-box;
   font-size: 1.5em;
   font-weight: bold;
+  padding: 0.15em 0 0.15em 0.5em;
+
   color: var(--header-fg-dark);
   background-color: var(--header-bg-dark);
 }
@@ -90,9 +94,11 @@ footer {
 
 /** saved-note-text-snippet: a snippet of the note the user saved */
 .saved-note-text-snippet {
-  max-height: 2.25em;
-  overflow: hidden;
+  max-height: 1.15em;
   margin: 0.5em 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   font-size: 1em;
   text-indent: 1em; 
