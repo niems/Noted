@@ -1,7 +1,17 @@
+:root {
+  --header-bg-dark: #202225;
+  --header-fg-dark: #A6A7A8;
+  --sidebar-bg-dark: #2F3136;
+  --sidebar-fg-dark: #ECEDEE;
+  --content-bg-dark: #36393F;
+  --content-fg-dark: #DCDDDE;
+}
 body {
   overflow: hidden;
   margin: 0;
   padding: 0;
+
+  background-color: var(--header-dark-bg);
 }
 
 .App {
@@ -16,13 +26,13 @@ body {
   grid-template-areas: "header header"
                        "content content"
                        "footer footer";
-
-  background-color: green;
 }
 
 header, footer {
   font-size: 1.5em;
   font-weight: bold;
+  color: var(--header-fg-dark);
+  background-color: var(--header-bg-dark);
 }
 
 header {
@@ -42,8 +52,8 @@ footer {
 .display-notes {
   box-sizing: border-box;
   grid-area: content;
-  background-color: yellow;
   overflow-y: auto;
+  background-color: var(--sidebar-bg-dark);
 }
 
 /** saved-notes-list: list of all notes in state */
@@ -51,7 +61,8 @@ footer {
   box-sizing: border-box;
   margin: 0;
   padding: 0.25em;
-  background-color: orange;
+
+  color: var(--sidebar-fg-dark);
 }
 
 /** saved-note: individual note list item */
@@ -69,28 +80,11 @@ footer {
 
   border-style: none;
   border-bottom: 1px solid gray;
-  background-color: #F8F8F8;
 }
-
-/*
-.saved-note {
-  height: 110px;
-  width: 100%;
-  box-sizing: border-box;
-  list-style-type: none;
-  
-  padding: 0.5em 0.25em;
-  margin: auto;
-
-  border-style: none;
-  border-bottom: 1px solid gray;
-  background-color: #F8F8F8;
-}
-*/
 
 /** saved-note-title: title of note */
 .saved-note-title {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 1.1em;
 }
 
@@ -102,7 +96,7 @@ footer {
 
   font-size: 1em;
   text-indent: 1em; 
-  color: #111111;
+  color: inherit;
 }
 
 /** saved-note-date: date the note was last saved */
@@ -117,7 +111,7 @@ footer {
 @media screen and (min-width: 850px) {
   .App {
     grid-template-areas: "header header"
-                         "content ."
+                         "content selected-content"
                          "footer footer";
   }
 }
