@@ -63,6 +63,9 @@ footer {
   box-sizing: border-box;
   grid-area: content;
   overflow: hidden;
+
+  display: flex;
+  flex: 1 1 100%;
 }
 
 .display-notes {
@@ -70,12 +73,12 @@ footer {
   overflow-y: auto;
   height: 100%;
   background-color: var(--sidebar-bg-dark);
+
+
 }
 
-/** new-note: wrapper when creating / editing a note */
-#new-note {
-  grid-area: current-content;
-}
+
+
 
 /** saved-notes-list: list of all notes in state */
 #saved-notes-list {
@@ -128,9 +131,43 @@ footer {
 }
 
 
+/** CURRENT NOTE SETUP */
+/** current-note: wrapper when creating / editing a note */
+.current-note {
+  background-color: green;
+  display: none;
+  padding: 1em 0.5em;
+}
+
+/** edit-note: the title and text of the current note being created/edited */
+.edit-note {
+  max-height: 100%;
+  height: 100%;
+  background-color: blue;
+
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+/** title of current note */
+#edit-note-title {
+  width: 100%;
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+#edit-note-title::placeholder {
+  opacity: 0.8;
+}
+
+/** text of current note */
+#edit-note-text {
+  flex: 1 1 auto;
+  font-size: 1em;
+
+}
 
 /** SCROLLBAR SETUP */
-
 /** scrollbar width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -155,17 +192,17 @@ footer {
 
 /** DESKTOP VIEW */
 @media screen and (min-width: 850px) {
-  .App {
-    grid-template-rows: [header] max-content [content] 1fr [footer] max-content;
-    grid-template-areas: "header header"
-                         "content current-content"
-                         "footer footer";
+  /** display notes will NOT grow and is resized to 300px */
+  .display-notes {
+    max-width: 350px;
+    flex: 0 1 350px;
   }
 
-  #new-note {
-    grid-area: current-content;
+  /** edit note view will be displayed, taking up the remaining space
+   ** after display-notes */
+  .current-note {
     display: block;
-    background-color: green;
+    flex: 1 1 100%;
   }
 }
 

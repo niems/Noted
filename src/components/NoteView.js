@@ -1,7 +1,6 @@
-
 import React, {Component} from 'react';
 import DisplayNotes from './DisplayNotes';
-import NewNote from './NewNote';
+import CurrentNote from './CurrentNote';
 
 class NoteView extends Component {
   constructor(props) {
@@ -51,7 +50,7 @@ class NoteView extends Component {
       ], 
 
       notesCreated: 0, //* total notes created - will differ from allNotes length if notes were deleted
-      isEditingNote: false, //* true if a note is being created / edited
+      isEditingNote: true, //* true if a note is being created / edited
     };
 
     this.addNote = this.addNote.bind(this); //* appends new note to allNotes
@@ -67,10 +66,12 @@ class NoteView extends Component {
   }
 
   render() {
+    let testSelectedNote = { ...this.state.allNotes[0] }; //uses the first note to test editing
+
     return (
       <div className="note-view">
         <DisplayNotes allNotes={this.state.allNotes} />
-        <NewNote />
+        <CurrentNote isDisplayed={this.state.isEditingNote} note={testSelectedNote} />
       </div>
     );
   }
