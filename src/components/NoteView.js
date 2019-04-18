@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import DisplayNotes from './DisplayNotes';
+import AllNotes from './AllNotes';
 import CurrentNote from './CurrentNote';
 
 class NoteView extends Component {
@@ -7,71 +7,83 @@ class NoteView extends Component {
     super(props);
 
     this.state = {
-      allNotes: [ //* stores all the saved notes
-        /*
-        {
-          id: this represents the current number of notes created; this.state.notesCreated++.
-          lastSaved: timestamp of the last time the note was saved
-
-          title (user input): title of the note.
-          note (user input): the saved note.
-        }
-        */
-        {
-          id: 1,
-          lastSaved: (new Date()).toUTCString(),
-          title: 'First saved note :D',
-          text: 'test note test note test note test note test note test note'
-        },
-        {
-          id: 2,
-          lastSaved: (new Date()).toUTCString(),
-          title: 'Another note title',
-          text: 'aanother note test data to see how the <li> wraps</li>another note test data to see how the <li> wraps</li>another note test data to see how the <li> wraps</li>nother note test data to see how the <li> wraps</li>'
-        },
-        {
-          id: 3,
-          lastSaved: (new Date()).toUTCString(),
-          title: '3 Another note title',
-          text: 'another note test data to see how the <li> wraps</li>'
-        },
-        {
-          id: 4,
-          lastSaved: (new Date()).toUTCString(),
-          title: 'adhfaAnother note title',
-          text: 'another note test data to see how the <li> wraps</li>'
-        },
-        {
-          id: 5,
-          lastSaved: (new Date()).toUTCString(),
-          title: ' ayyy Another note title',
-          text: 'another note test data to see how the <li> wraps</li>'
-        },
-      ], 
-
-      notesCreated: 0, //* total notes created - will differ from allNotes length if notes were deleted
-      isEditingNote: true, //* true if a note is being created / edited
+      savedNotes: new Map(),
+      notesCreated: 0, //* total notes created - will differ from savedNotes length if notes were deleted
+      selectedNote: null, //* current selected note displayed in EditNote
     };
 
-    this.addNote = this.addNote.bind(this); //* appends new note to allNotes
-    this.deleteNote = this.deleteNote.bind(this); //* deletes note based on id
+
+    //*************************************** */
+    //*       EVENT HANDLERS - selectedNote
+
+    //* handler for selecting a note in AllNotes
+    this.handleNoteSelect = this.handleNoteSelect.bind(this); 
+
+    //* callback when user modifies the selectedNote in CurrentNote.
+    this.handleSelectedNoteChange = this.handleSelectedNoteChange.bind(this);
   }
 
-  addNote() {
-    return null;
+
+  //! TESTING ONLY: data population
+  componentDidMount() {
+    let testData = new Map();
+
+    testData.set(1, {
+      id: 1,
+      lastSaved: (new Date()).toUTCString(),
+      title: 'Note 1',
+      text: 'this is the text for NOTE 1, aaaaaaaaaand I\'m done'
+    });
+
+    testData.set(2, {
+      id: 2,
+      lastSaved: (new Date()).toUTCString(),
+      title: 'Note 2',
+      text: 'This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.'
+    });
+    
+    this.setState({
+      savedNotes: testData,
+    });
   }
 
-  deleteNote() {
-    return null;
+
+  //* user selected note to display
+  handleNoteSelect(event) {
+    let selectedId = Number(event.currentTarget.id);
+    console.log(`handleNoteSelect current target: ${selectedId}\n`);
+   
+    this.setState({
+      selectedNote: { ...this.state.savedNotes.get(selectedId) }
+    });
+  }
+
+
+  //* the selectedNote has been updated
+  handleSelectedNoteChange(event) {
+    const selectedNote = { ...this.state.selectedNote };
+
+    switch (event.target.id) {
+      case 'edit-note-title': //* selected note title modified
+        selectedNote.title = event.target.value;
+        break;
+
+      case 'edit-note-text': //* selected note text modified
+        selectedNote.text = event.target.value;
+        break;
+      
+      default:
+        console.log('Event mod not supported.');
+    }
+
+    this.setState({ selectedNote })
   }
 
   render() {
-    let testSelectedNote = { ...this.state.allNotes[0] }; //uses the first note to test editing
-
     return (
       <div className="note-view">
-        <DisplayNotes allNotes={this.state.allNotes} />
-        <CurrentNote isDisplayed={this.state.isEditingNote} note={testSelectedNote} />
+        <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect} />
+        <CurrentNote note={this.state.selectedNote} handleNoteChange={this.handleSelectedNoteChange} /> 
       </div>
     );
   }
