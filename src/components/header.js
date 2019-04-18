@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header() {
   return (
-    <header>Noted</header>
+    <header><h1>Noted</h1></header>
   );
 }
 

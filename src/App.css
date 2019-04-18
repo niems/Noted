@@ -6,9 +6,9 @@
   --content-bg-dark: #36393F;
   --content-fg-dark: #DCDDDE;
 
-  --note-header-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1600 - 300)));
+  --note-header-size: calc(18px + (20 - 18) * ((100vw - 300px) / (1600 - 300)));
   --note-text-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
-  --note-date-size: calc(12px + (14 - 12) * ((100vw - 300px) / (1600 - 300)));
+  --note-date-size: calc(11px + (12 - 11) * ((100vw - 300px) / (1600 - 300)));
 }
 
 body {
@@ -35,7 +35,6 @@ body {
 
 header, footer {
   box-sizing: border-box;
-  height: 32px;
 
   color: var(--header-fg-dark);
   background-color: var(--header-bg-dark);
@@ -43,11 +42,19 @@ header, footer {
 
 header {
   grid-area: header;
+}
+
+h1 {
+  max-height: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 4px 0px 0px 4px;
   font-weight: bold;
-  font-size: 1.15em;
+  font-size: 1em;
 }
 
 footer {
+  height: 16px;
   grid-area: footer;
 }
 
@@ -137,16 +144,21 @@ footer {
   background-color: green;
   display: none;
   padding: 1em 0.5em;
+
+  color: var(--content-fg-dark);
+  background-color: var(--content-bg-dark);
 }
 
 /** edit-note: the title and text of the current note being created/edited */
 .edit-note {
   max-height: 100%;
   height: 100%;
-  background-color: blue;
 
   display: flex;
   flex-flow: column nowrap;
+
+  color: inherit;
+  background-color: inherit;
 }
 
 /** title of current note */
@@ -154,6 +166,9 @@ footer {
   width: 100%;
   font-size: 2em;
   margin-bottom: 0.5em;
+
+  color: inherit;
+  background-color: inherit;
 }
 
 #edit-note-title::placeholder {
@@ -165,6 +180,9 @@ footer {
   flex: 1 1 auto;
   font-size: 1em;
 
+  color: inherit;
+  background-color: inherit; 
+  resize: none;
 }
 
 /** SCROLLBAR SETUP */
@@ -176,11 +194,12 @@ footer {
 /** track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1; 
+  background: #888; 
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: var(--header-bg-dark);
 }
 
 /* Handle on hover */
@@ -191,7 +210,7 @@ footer {
 
 
 /** DESKTOP VIEW */
-@media screen and (min-width: 850px) {
+@media screen and (min-width: 750px) {
   /** display notes will NOT grow and is resized to 300px */
   .display-notes {
     max-width: 350px;
