@@ -80,8 +80,6 @@ class NoteView extends Component {
   }
 
   render() {
-    let testSelectedNote = { ...this.state.allNotes[0] }; //uses the first note to test editing
-
     return (
       <div className="note-view">
         <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect} />
