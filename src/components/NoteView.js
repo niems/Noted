@@ -25,6 +25,9 @@ class NoteView extends Component {
     //* callback when user clicks "new note" button
     this.handleNewNote = this.handleNewNote.bind(this);
 
+    //* callback to clear selectedNote - does NOT modify the stored data in savedNotes
+    this.handleClearSelectedNote = this.handleClearSelectedNote.bind(this);
+
     //* callback to save selectedNote to savedNotes
     this.handleSaveNote = this.handleSaveNote.bind(this);
     
@@ -64,6 +67,10 @@ class NoteView extends Component {
 
   }
 
+  //* clears the selectedNote but does NOT modify the savedNote data
+  handleClearSelectedNote(event) {
+    this.setState({ selectedNote: null });
+  }
 
   //* creates / updates selectedNote in savedNotes: the selectedNote data will overwrite
   //* any data from the same note (same id) previously stored in savedNotes.
@@ -133,9 +140,11 @@ class NoteView extends Component {
   render() {
     return (
       <div className="note-view">
-        <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect} handleDeleteNote={this.handleDeleteNote} />
+        <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect}
+                  handleDeleteNote={this.handleDeleteNote} />
+
         <CurrentNote note={this.state.selectedNote} handleNoteChange={this.handleSelectedNoteChange}
-                     handleSaveNote={this.handleSaveNote} /> 
+                     handleSaveNote={this.handleSaveNote} handleClearNote={this.handleClearSelectedNote} /> 
       </div>
     );
   }
