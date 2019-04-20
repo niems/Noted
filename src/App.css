@@ -24,6 +24,10 @@ body {
   background-color: var(--header-dark-bg);
 }
 
+body * {
+  outline-color: var(--accent);
+}
+
 .App {
   box-sizing: border-box;
   width: 100%;
@@ -72,7 +76,7 @@ footer {
   max-height: 30px;
   height: 30px;
   box-sizing: border-box;
-  margin: 0.5em 0 0.5em 0.1em;
+  margin: 0.25em 0 1em 0.1em;
 
   display: flex;
   flex-flow: row nowrap;
@@ -85,7 +89,7 @@ footer {
 .note-opts-btn {
   background: none;
   padding: 0;
-  border-radius: 5px;
+  border-radius: 50%;
 }
 
 .note-opts-btn:hover {
@@ -119,7 +123,7 @@ footer {
   position: relative; /** used to display a selectedNote fullscreen on mobile */
 }
 
-.display-notes {
+.all-notes {
   box-sizing: border-box;
   width: 100%;
   overflow-y: auto;
@@ -195,12 +199,20 @@ footer {
 /** CURRENT NOTE SETUP */
 /** current-note: wrapper when creating / editing a note */
 .current-note {
+  z-index: 1000;
   box-sizing: border-box;
-  display: none;
+  display: none; 
   padding: 1em 1.25em;
 
   color: var(--content-fg-dark);
   background-color: var(--content-bg-dark);
+}
+
+.current-note.selected {
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 /** edit-note: the title and text of the current note being created/edited */
@@ -236,10 +248,16 @@ footer {
 #edit-note-text {
   flex: 1 1 auto;
   font-size: var(--note-text-size);
+  line-height: 150%;
 
   color: inherit;
   background-color: inherit; 
   resize: none;
+  padding: 1em;
+  
+  border-style: solid;
+  border-color: var(--sidebar-bg-dark);
+  border-radius: 8px;
 }
 
 /** SCROLLBAR SETUP */
@@ -276,7 +294,7 @@ footer {
 
   /** edit note view will be displayed, taking up the remaining space
    ** after display-notes */
-  .current-note {
+  .current-note, .current-note.selected {
     position: static;
     display: block;
     flex: 1 1 100%;

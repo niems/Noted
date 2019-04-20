@@ -36,10 +36,11 @@ function EditNote({ note, handleNoteChange, handleSaveNote, handleClearNote }) {
 * a previously saved note or to create a new note */
 function CurrentNote({ note, handleNoteChange, handleSaveNote, handleClearNote }) { 
   console.log('CurrentNote rendered');
-  const noteClasses = note ? 'current-note displayed' : 'current-note';
+
+  const currentNoteClasses = note ? 'current-note selected' : 'current-note';
 
   return (
-    <article className={noteClasses}>
+    <article className={currentNoteClasses}>
       { note ?
         <EditNote note={note} handleNoteChange={handleNoteChange}
                   handleSaveNote={handleSaveNote} handleClearNote={handleClearNote} /> :

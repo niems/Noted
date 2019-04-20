@@ -16,7 +16,7 @@ function AllNotes({ savedNotes, handleNoteSelect, handleDeleteNote }) {
   ));
 
   return (
-    <div className='display-notes'>
+    <div className='all-notes'>
 
       <div id='all-notes-opts-bar' className='note-opts-bar'>
         <span className='all-notes-opts-title'>All Notes</span>
