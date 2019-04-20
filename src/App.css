@@ -100,10 +100,12 @@ footer {
   filter: invert(1);
 }
 
+
+
+
 /********************************* 
  ** DisplayNotes setup
 * *********************************/
-
 
 /**! display-notes ---> note-view */
 /** display-notes: the wrapper around the list of saved notes*/
@@ -114,6 +116,7 @@ footer {
 
   display: flex;
   flex: 1 1 100%;
+  position: relative; /** used to display a selectedNote fullscreen on mobile */
 }
 
 .display-notes {
@@ -192,6 +195,7 @@ footer {
 /** CURRENT NOTE SETUP */
 /** current-note: wrapper when creating / editing a note */
 .current-note {
+  box-sizing: border-box;
   display: none;
   padding: 1em 1.25em;
 
@@ -273,6 +277,7 @@ footer {
   /** edit note view will be displayed, taking up the remaining space
    ** after display-notes */
   .current-note {
+    position: static;
     display: block;
     flex: 1 1 100%;
   }
