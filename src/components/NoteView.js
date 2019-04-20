@@ -27,6 +27,9 @@ class NoteView extends Component {
 
     //* callback to save selectedNote to savedNotes
     this.handleSaveNote = this.handleSaveNote.bind(this);
+    
+    //* callback to delete selectedNote, removing from savedNotes and clearing currentNote
+    this.handleDeleteNote = this.handleDeleteNote.bind(this);
   }
 
 
@@ -76,6 +79,26 @@ class NoteView extends Component {
   }
 
 
+  handleDeleteNote(event) {
+    const savedNotes = this.state.savedNotes;
+
+    //* a note is seleted that can be removed
+    if (this.state.selectedNote) {
+      this.state.savedNotes.delete(this.state.selectedNote.id);
+
+      this.setState({   //* clears selectedNote and updates savedNotes
+        savedNotes: savedNotes, 
+        selectedNote: null
+      });
+    }
+
+    //* object to delete doesn't exist
+    else {
+      alert('Nothing selected to remove...');
+    }
+  }
+
+
   //* user selected note to display
   handleNoteSelect(event) {
     let selectedId = Number(event.currentTarget.id);
@@ -110,7 +133,7 @@ class NoteView extends Component {
   render() {
     return (
       <div className="note-view">
-        <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect} />
+        <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect} handleDeleteNote={this.handleDeleteNote} />
         <CurrentNote note={this.state.selectedNote} handleNoteChange={this.handleSelectedNoteChange}
                      handleSaveNote={this.handleSaveNote} /> 
       </div>

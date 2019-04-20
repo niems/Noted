@@ -12,8 +12,8 @@ function NoSelection(props) {
 function EditNote({ note, handleNoteChange, handleSaveNote }) {
   return (
     <div className='edit-note'>
-      <div className='edit-note-opts'>
-        <button className='edit-note-save-btn' type='button' onClick={handleSaveNote}>
+      <div id='edit-note-opts-bar' className='note-opts-bar'>
+        <button id='edit-note-save-btn' className='note-opts-btn' type='button' onClick={handleSaveNote}>
           <img src='./assets/save-white.svg' alt='save note button'/>
         </button> 
       </div>
