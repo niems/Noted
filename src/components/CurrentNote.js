@@ -9,10 +9,13 @@ function NoSelection(props) {
 
 
 //* User is either editing a previously saved note or creating a new note 
-function EditNote({ note, handleNoteChange, handleSaveNote }) {
+function EditNote({ note, handleNoteChange, handleSaveNote, handleClearNote }) {
   return (
     <div className='edit-note'>
       <div id='edit-note-opts-bar' className='note-opts-bar'>
+        <button id='edit-note-back-btn' className='note-opts-btn' type='button' onClick={handleClearNote}>
+          <img src='./assets/back-arrow.svg' alt='clear selected note button'/>
+        </button> 
         <button id='edit-note-save-btn' className='note-opts-btn' type='button' onClick={handleSaveNote}>
           <img src='./assets/save-white.svg' alt='save note button'/>
         </button> 
@@ -31,13 +34,14 @@ function EditNote({ note, handleNoteChange, handleSaveNote }) {
 /*
 * displays view for editing a note ONLY if user selected 
 * a previously saved note or to create a new note */
-function CurrentNote({ note, handleNoteChange, handleSaveNote }) { 
+function CurrentNote({ note, handleNoteChange, handleSaveNote, handleClearNote }) { 
   console.log('CurrentNote rendered');
 
   return (
     <article className='current-note'>
       { note ?
-        <EditNote note={note} handleNoteChange={handleNoteChange} handleSaveNote={handleSaveNote} /> :
+        <EditNote note={note} handleNoteChange={handleNoteChange}
+                  handleSaveNote={handleSaveNote} handleClearNote={handleClearNote} /> :
         <NoSelection />
       }
     </article>
