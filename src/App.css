@@ -6,6 +6,8 @@
   --content-bg-dark: #36393F;
   --content-fg-dark: #DCDDDE;
 
+  /** all font sizes */
+  --selected-note-header-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300)));
   --note-header-size: calc(18px + (20 - 18) * ((100vw - 300px) / (1600 - 300)));
   --note-text-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
   --note-date-size: calc(11px + (12 - 11) * ((100vw - 300px) / (1600 - 300)));
@@ -115,7 +117,6 @@ footer {
 /** saved-note-title: title of note */
 .saved-note-title {
   font-weight: 500;
-  /*font-size: 1.1em;*/
   font-size: var(--note-header-size);
 }
 
@@ -161,11 +162,41 @@ footer {
   background-color: inherit;
 }
 
+/** edit-note-opts: holds the options for modifying the selected note
+ **  currently SAVE is the only option */
+.edit-note-opts {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+
+  background-color: none;
+}
+
+/** button used to save the current note in the note list */
+.edit-note-save-btn {
+  background: none;
+  padding: 0;
+
+  border-radius: 5px;
+}
+
+/** image used as the save icon */
+.edit-note-save-btn img {
+  display: block;
+
+  width: 26px;
+  height: auto;
+  filter: invert(1);
+}
+
 /** title of current note */
 #edit-note-title {
   width: 100%;
-  font-size: 2em;
   margin-bottom: 0.5em;
+  font-size: var(--selected-note-header-size);
 
   color: inherit;
   background-color: inherit;
@@ -178,7 +209,7 @@ footer {
 /** text of current note */
 #edit-note-text {
   flex: 1 1 auto;
-  font-size: 1em;
+  font-size: var(--note-text-size);
 
   color: inherit;
   background-color: inherit; 

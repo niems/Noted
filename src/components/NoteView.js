@@ -14,13 +14,19 @@ class NoteView extends Component {
 
 
     //*************************************** */
-    //*       EVENT HANDLERS - selectedNote
+    //*       EVENT HANDLERS 
 
     //* handler for selecting a note in AllNotes
     this.handleNoteSelect = this.handleNoteSelect.bind(this); 
 
     //* callback when user modifies the selectedNote in CurrentNote.
     this.handleSelectedNoteChange = this.handleSelectedNoteChange.bind(this);
+
+    //* callback when user clicks "new note" button
+    this.handleNewNote = this.handleNewNote.bind(this);
+
+    //* callback to save selectedNote to savedNotes
+    this.handleSaveNote = this.handleSaveNote.bind(this);
   }
 
 
@@ -45,6 +51,28 @@ class NoteView extends Component {
     this.setState({
       savedNotes: testData,
     });
+  }
+
+  //TODO: either code the newNote button OR implement save functionality when the
+  //TODO: selected note is modified
+  //* creates a new "temporary" note by only storing it as the selectedNote.
+  //* Once saved
+  handleNewNote(event) {
+
+  }
+
+
+  //* creates / updates selectedNote in savedNotes: the selectedNote data will overwrite
+  //* any data from the same note (same id) previously stored in savedNotes.
+  handleSaveNote(event) {
+    //* saves the changes from selectedNote into the savedNotes list
+    const savedNotes = this.state.savedNotes;
+    const updatedNote = { ...this.state.selectedNote }; //* pulls selectedNote used to update savedNotes list
+    updatedNote.lastSaved = (new Date()).toUTCString(); //* updates save timestamp
+
+    //* updates selected note & state
+    savedNotes.set(updatedNote.id, updatedNote);
+    this.setState({ savedNotes });
   }
 
 
@@ -83,7 +111,8 @@ class NoteView extends Component {
     return (
       <div className="note-view">
         <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect} />
-        <CurrentNote note={this.state.selectedNote} handleNoteChange={this.handleSelectedNoteChange} /> 
+        <CurrentNote note={this.state.selectedNote} handleNoteChange={this.handleSelectedNoteChange}
+                     handleSaveNote={this.handleSaveNote} /> 
       </div>
     );
   }
