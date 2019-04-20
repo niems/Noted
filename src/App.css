@@ -6,7 +6,10 @@
   --content-bg-dark: #36393F;
   --content-fg-dark: #DCDDDE;
 
+  --accent: #7289DA;
+
   /** all font sizes */
+  --all-notes-header-size: calc(24px + (26 - 24) * ((100vw - 300px) / (1600 - 300)));
   --selected-note-header-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1600 - 300)));
   --note-header-size: calc(18px + (20 - 18) * ((100vw - 300px) / (1600 - 300)));
   --note-text-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
@@ -61,6 +64,42 @@ footer {
 }
 
 
+/** edit-note-opts: holds the options for modifying the selected note
+ **  currently SAVE is the only option */
+
+.note-opts-bar {
+  width: 100%;
+  max-height: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  margin: 0.5em 0 0 0.1em;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+
+  background-color: none;
+}
+
+/** default button styling in the options bar */
+.note-opts-btn {
+  background: none;
+  padding: 0;
+  border-radius: 5px;
+}
+
+.note-opts-btn:hover {
+  background-color: var(--accent);
+}
+
+/** default image styling for button icons */
+.note-opts-btn img {
+  display: block;
+  width: 26px;
+  height: auto;
+  filter: invert(1);
+}
+
 /********************************* 
  ** DisplayNotes setup
 * *********************************/
@@ -79,14 +118,22 @@ footer {
 
 .display-notes {
   box-sizing: border-box;
+  width: 100%;
   overflow-y: auto;
-  height: 100%;
+  padding: 1em 0;
   background-color: var(--sidebar-bg-dark);
-
-
 }
 
+#all-notes-opts-bar {
+  padding: 0 0.5em;
+  justify-content: space-between;
+}
 
+.all-notes-opts-title {
+  font-weight: bold;
+  font-size: var(--all-notes-header-size);
+  color: var(--sidebar-fg-dark);
+}
 
 
 /** saved-notes-list: list of all notes in state */
@@ -94,7 +141,7 @@ footer {
   box-sizing: border-box;
   margin: 0;
   padding: 0.5em;
-
+  width: 100%;
   color: var(--sidebar-fg-dark);
 }
 
@@ -114,9 +161,13 @@ footer {
   border-bottom: 1px solid gray;
 }
 
+.saved-note:hover {
+  background-color: var(--content-bg-dark);
+}
+
 /** saved-note-title: title of note */
 .saved-note-title {
-  font-weight: 500;
+  font-weight: bold;
   font-size: var(--note-header-size);
 }
 
@@ -142,9 +193,8 @@ footer {
 /** CURRENT NOTE SETUP */
 /** current-note: wrapper when creating / editing a note */
 .current-note {
-  background-color: green;
   display: none;
-  padding: 1em 0.5em;
+  padding: 1em 1.25em;
 
   color: var(--content-fg-dark);
   background-color: var(--content-bg-dark);
@@ -162,42 +212,15 @@ footer {
   background-color: inherit;
 }
 
-/** edit-note-opts: holds the options for modifying the selected note
- **  currently SAVE is the only option */
-.edit-note-opts {
-  width: 100%;
-  box-sizing: border-box;
-
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-end;
-
-  background-color: none;
-}
-
-/** button used to save the current note in the note list */
-.edit-note-save-btn {
-  background: none;
-  padding: 0;
-
-  border-radius: 5px;
-}
-
-/** image used as the save icon */
-.edit-note-save-btn img {
-  display: block;
-
-  width: 26px;
-  height: auto;
-  filter: invert(1);
-}
 
 /** title of current note */
 #edit-note-title {
   width: 100%;
   margin-bottom: 0.5em;
   font-size: var(--selected-note-header-size);
+  font-weight: bold;
 
+  border-style: none;
   color: inherit;
   background-color: inherit;
 }
