@@ -10,13 +10,13 @@ function NoteItem({ note, handleNoteSelect }) {
   );
 }
 
-function AllNotes({ savedNotes, handleNoteSelect, handleDeleteNote }) {
+function AllNotes({ savedNotes, handleNoteSelect, handleDeleteNote, handleNewNote }) {
   const noteList = [...savedNotes.values()].map(note => (
     <NoteItem key={note.id} note={note} handleNoteSelect={handleNoteSelect} /> 
   ));
 
   return (
-    <div className='display-notes'>
+    <div className='all-notes'>
 
       <div id='all-notes-opts-bar' className='note-opts-bar'>
         <span className='all-notes-opts-title'>All Notes</span>
@@ -26,6 +26,10 @@ function AllNotes({ savedNotes, handleNoteSelect, handleDeleteNote }) {
       </div>
 
       <ul id='saved-notes-list' >{noteList}</ul>
+
+      <button id='new-note-btn' className='note-opts-btn' type='button' onClick={handleNewNote}>
+        <img src='./assets/add-note.svg' alt='create new note'/>
+      </button> 
     </div>
   );
 }

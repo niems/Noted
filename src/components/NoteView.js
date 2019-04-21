@@ -35,7 +35,7 @@ class NoteView extends Component {
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
   }
 
-
+/*
   //! TESTING ONLY: data population
   componentDidMount() {
     let testData = new Map();
@@ -58,13 +58,32 @@ class NoteView extends Component {
       savedNotes: testData,
     });
   }
+  */
 
   //TODO: either code the newNote button OR implement save functionality when the
   //TODO: selected note is modified
   //* creates a new "temporary" note by only storing it as the selectedNote.
   //* Once saved
   handleNewNote(event) {
+    console.log('new note :D');
+    
+    //TODO ALL:
+    //? ask user to save / discard current note if one is selected and has been modified
+    //! REMOVE SAVEDNOTES DATA WHILE TESTING
+    //* create new note object and save as selectedNote
+    //* if the selectedNote is saved it will need to be added to savedNotes
 
+    //* setup for new note object
+    let notesCreated = this.state.notesCreated; //* id based on number of notes created (not tied to savedNotes.size)
+    const selectedNote = {
+      id: notesCreated,
+      lastSaved: (new Date()).toUTCString(),
+      title: '',
+      text: ''
+    };
+
+    notesCreated += 1; //* updates number of notes created
+    this.setState({ notesCreated, selectedNote }); 
   }
 
   //* clears the selectedNote but does NOT modify the savedNote data
@@ -109,7 +128,6 @@ class NoteView extends Component {
   //* user selected note to display
   handleNoteSelect(event) {
     let selectedId = Number(event.currentTarget.id);
-    console.log(`handleNoteSelect current target: ${selectedId}\n`);
    
     this.setState({
       selectedNote: { ...this.state.savedNotes.get(selectedId) }
@@ -141,7 +159,7 @@ class NoteView extends Component {
     return (
       <div className="note-view">
         <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect}
-                  handleDeleteNote={this.handleDeleteNote} />
+                  handleDeleteNote={this.handleDeleteNote} handleNewNote={this.handleNewNote} />
 
         <CurrentNote note={this.state.selectedNote} handleNoteChange={this.handleSelectedNoteChange}
                      handleSaveNote={this.handleSaveNote} handleClearNote={this.handleClearSelectedNote} /> 
