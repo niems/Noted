@@ -91,17 +91,38 @@ class NoteView extends Component {
     this.setState({ selectedNote: null });
   }
 
+  //* note is saved if at least the title field isn't empty
+  isValidNote(note) {
+    return note.title !== '';
+  }
+
+  //* removes the whitespace around the title and text body of the note
+  trimNote() {
+    const trimmedNote = { ...this.state.selectedNote };
+    trimmedNote.title = trimmedNote.title.trim(); //* removes whitespace around title
+    trimmedNote.text = trimmedNote.text.trim();   //* removes whitespace around text body
+
+    return trimmedNote;
+  }
+
   //* creates / updates selectedNote in savedNotes: the selectedNote data will overwrite
   //* any data from the same note (same id) previously stored in savedNotes.
   handleSaveNote(event) {
-    //* saves the changes from selectedNote into the savedNotes list
-    const savedNotes = this.state.savedNotes;
-    const updatedNote = { ...this.state.selectedNote }; //* pulls selectedNote used to update savedNotes list
-    updatedNote.lastSaved = (new Date()).toUTCString(); //* updates save timestamp
+    const updatedNote = this.trimNote(); //* returns the selected note with the whitespace around title/text removed
 
-    //* updates selected note & state
-    savedNotes.set(updatedNote.id, updatedNote);
-    this.setState({ savedNotes });
+    if (this.isValidNote(updatedNote)) {
+      //* saves the changes from selectedNote into the savedNotes list
+      updatedNote.lastSaved = (new Date()).toUTCString(); //* updates save timestamp
+      const savedNotes = this.state.savedNotes;
+
+      //* updates selected note & state
+      savedNotes.set(updatedNote.id, updatedNote);
+      this.setState({ savedNotes });
+    }
+
+    else {
+      alert('COMPUTER SAYS: The note must be filled out to use it...');
+    }
   }
 
 
