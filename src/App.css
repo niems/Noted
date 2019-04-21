@@ -190,6 +190,8 @@ footer {
   padding: 0.5em;
   width: 100%;
   color: var(--sidebar-fg-dark);
+  background-color: inherit;
+  flex: 1 1 auto;
 }
 
 /** saved-note: individual note list item */
