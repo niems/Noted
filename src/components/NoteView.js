@@ -35,35 +35,7 @@ class NoteView extends Component {
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
   }
 
-/*
-  //! TESTING ONLY: data population
-  componentDidMount() {
-    let testData = new Map();
-
-    testData.set(1, {
-      id: 1,
-      lastSaved: (new Date()).toUTCString(),
-      title: 'Note 1',
-      text: 'this is the text for NOTE 1, aaaaaaaaaand I\'m done'
-    });
-
-    testData.set(2, {
-      id: 2,
-      lastSaved: (new Date()).toUTCString(),
-      title: 'Note 2',
-      text: 'This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.This is placeholder text for Note 2.'
-    });
-    
-    this.setState({
-      savedNotes: testData,
-    });
-  }
-  */
-
-  //TODO: either code the newNote button OR implement save functionality when the
-  //TODO: selected note is modified
   //* creates a new "temporary" note by only storing it as the selectedNote.
-  //* Once saved
   handleNewNote(event) {
     console.log('new note :D');
     
@@ -141,7 +113,7 @@ class NoteView extends Component {
 
     //* object to delete doesn't exist
     else {
-      alert('Nothing selected to remove...');
+      alert('COMPUTER SAYS: Nothing selected to remove...');
     }
   }
 
@@ -173,17 +145,18 @@ class NoteView extends Component {
         console.log('Event mod not supported.');
     }
 
-    this.setState({ selectedNote })
+    this.setState({ selectedNote });
   }
 
   render() {
     return (
       <div className="note-view">
         <AllNotes savedNotes={this.state.savedNotes} handleNoteSelect={this.handleNoteSelect}
-                  handleDeleteNote={this.handleDeleteNote} handleNewNote={this.handleNewNote} />
+                  handleNewNote={this.handleNewNote} />
 
         <CurrentNote note={this.state.selectedNote} handleNoteChange={this.handleSelectedNoteChange}
-                     handleSaveNote={this.handleSaveNote} handleClearNote={this.handleClearSelectedNote} /> 
+                     handleSaveNote={this.handleSaveNote} handleClearNote={this.handleClearSelectedNote}
+                     handleDeleteNote={this.handleDeleteNote} />
       </div>
     );
   }

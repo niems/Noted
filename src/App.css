@@ -14,6 +14,9 @@
   --note-header-size: calc(18px + (20 - 18) * ((100vw - 300px) / (1600 - 300)));
   --note-text-size: calc(14px + (16 - 14) * ((100vw - 300px) / (1600 - 300)));
   --note-date-size: calc(11px + (12 - 11) * ((100vw - 300px) / (1600 - 300)));
+
+  --btn-opts-width: 24px;
+  --btn-opts-bg: gray;
 }
 
 body {
@@ -78,24 +81,32 @@ footer {
 
 .note-opts-bar {
   width: 100%;
-  max-height: 30px;
-  height: 30px;
+  max-height: 40px;
+  height: 40px;
   box-sizing: border-box;
-  margin: 0.25em 0 1em 0.1em;
+  margin: 0 0 1.5em 0;
 
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
+
+  border: solid 1px gray;
+  border-style: none none solid none;
 
   justify-content: space-between;
   background-color: none;
+}
+
+#edit-note-save-btn {
+  margin-right: 3em;
 }
 
 /** default button styling in the options bar */
 .note-opts-btn {
   background: none;
   padding: 0;
-  border-radius: 5px;
-  background-color: gray;
+  border-radius: 8px;
+  background-color: var(--btn-opts-bg);
 }
 
 .note-opts-btn:hover {
@@ -105,9 +116,8 @@ footer {
 /** default image styling for button icons */
 .note-opts-btn img {
   display: block;
-  width: 26px;
+  width: var(--btn-opts-width);
   height: auto;
-  /**filter: invert(1);*/
 }
 
 
@@ -117,7 +127,6 @@ footer {
  ** DisplayNotes setup
 * *********************************/
 
-/**! display-notes ---> note-view */
 /** display-notes: the wrapper around the list of saved notes*/
 .note-view {
   box-sizing: border-box;
@@ -142,6 +151,10 @@ footer {
   align-items: center; 
 }
 
+#all-notes-title {
+  color: var(--header-fg-dark);
+}
+
 #all-notes-opts-bar {
   padding: 0 0.5em;
 }
@@ -153,11 +166,12 @@ footer {
 }
 
 #new-note-btn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1001;
 
-  transform: translate(-50%, -15%);
+  /*transform: translate(-50%, -15%);*/
   background-color: var(--accent);
 }
 
@@ -166,7 +180,7 @@ footer {
 }
 
 #new-note-btn img {
-  width: 30px;
+  width: 32px;
 }
 
 /** saved-notes-list: list of all notes in state */
